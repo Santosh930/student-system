@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 40px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <p>ft-web17-2 | ft-web18-5</p>
+    </div>
+    <button>
+        <a href="dashboard.html">Dashboard</a>
+    </button>
+    <h1>Add Students Data</h1>
+    <form action="" id="form">
+        <input type="text" name="name" id="name" placeholder="Enter your name"><br>
+        <input type="text" name="course" id="course" placeholder="Enter your course"><br>
+        <input type="text" id="unit" placeholder="Enter unit"><br>
+        <input type="url" name="" id="img" placeholder="Enter image url"><br>
+        <input type="text" name="batch" id="batch" placeholder="Enter your batch"><br>
+        <input type="submit" name="submit" id="submit">
+
+    
+    </form>
+    
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",myfunction);
+    let arr=JSON.parse(localStorage.getItem("items"))|| [];
+
+
+    function Product(n,c,i,u,b){
+        this.name=n;
+        this.course=c;
+        this.image=i;
+        this.unit=u;
+        this.batch=`Ft-Web${b}`;
+        
+
+    }
+    
+    
+
+    function myfunction(){
+        event.preventDefault();
+        // console.log("insidefunction")
+        let form=document.getElementById("form");
+
+         let name=form.name.value;
+        let course=form.course.value;
+        let image=form.img.value;
+        let unit=form.unit.value;
+        let batch=form.batch.value;
+        
+        let p=new Product(name,course,image,unit,batch);
+        arr.push(p);
+
+        console.log(arr);
+
+        
+        localStorage.setItem("items",JSON.stringify(arr));
+        //  console.log(p);
+
+        
+    }
+    
+    
+    function calculate(){
+        let arr=JSON.parse(localStorage.getItem("items"))||[];
+        let obj={};
+        for(let i=0;i<arr.length;i++)
+        {
+            if(!obj[arr[i].batch])
+            {
+                obj[arr[i].batch]=0;
+            }
+        }
+        for(let i=0;i<arr.length;i++)
+        {
+            obj[arr[i].batch]++;
+        }
+        // console.log(obj);
+    }
+    //  calculate();
+
+</script>
